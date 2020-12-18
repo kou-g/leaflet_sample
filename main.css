@@ -1,0 +1,39 @@
+html, body  {
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+#map {
+	width: 100%;
+	height: 100%;
+	background-color: rgb(72, 75, 102);
+}
+
+.leaflet-layerstree-header-label {
+    font-size: 1.2em;
+}
+span.leaflet-layerstree-header-label {
+    font-weight: bold;
+    color: rgb(70, 99, 155);
+}
+
+.leaflet-control-layers.leaflet-control-layers-expanded.leaflet-control {
+    width: 200px;
+    background-color: rgba(255,255,255,0.6);
+}
+
+.leaflet-canvas-layer {
+    opacity: 0.55;
+}
+
+.leaflet-control.leaflet-bar.leaflet-html-legend {
+    width: 400px;
+    background-color: rgba(255,255,255,0.0);
+    border: none;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.legend_img {
+    width: 390px;
+}
