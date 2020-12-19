@@ -119,6 +119,16 @@ var legend_radar = L.control.htmllegend({
     })
     map.addControl(legend_radar)
 
+// 衛星(png)
+var eisei = L.layerGroup();
+var lat1 = 20.0;  var lon1 = 120.0;
+var lat2 = 48.0;  var lon2 = 150.0;
+var bounds = L.latLngBounds([lat1, lon1],[lat2, lon2]);
+L.imageOverlay('./img/eisei.png', bounds, {
+    opacity: 1.0,
+    pane: pane_lowest
+}).addTo(eisei);
+
 // METAR
 var metar = L.layerGroup();
 L.marker([42.40, 141.40]).addTo(metar)
@@ -146,17 +156,27 @@ var baseTree = {
 var overlayTree = {
     label: '要素選択',
     children: [
-        { label: 'レーダーエコー合成図', layer: radar },
-        { label: '風粒子(地上)', layer: velocity },
-        { label: '等圧線(地上)', layer: prmsl },
-        { label: '気温線(地上)', layer: temp },
-        { label: 'METAR', layer: metar },
-        { label: 'METEOGRAM', layer: meteogram },
+        {
+            label: '観測',
+            children: [
+                { label: '気象レーダー', layer: radar },
+                { label: '衛星画像', layer: eisei },
+                { label: 'METAR', layer: metar },
+            ]
+        },{
+            label: '予報',
+            children: [
+                { label: '地上 風粒子', layer: velocity },
+                { label: '地上 等圧線', layer: prmsl },
+                { label: '地上 気温', layer: temp },
+                { label: 'METEOGRAM', layer: meteogram },
+            ]
+        }
     ]
 };
 
 var options = {
-    collapsed: false
+//    collapsed: false
 }
 L.control.layers.tree(baseTree, overlayTree, options).addTo(map);
 
