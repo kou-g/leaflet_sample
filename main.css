@@ -34,6 +34,19 @@ span.leaflet-layerstree-header-label {
     padding-top: 0;
     padding-bottom: 0;
 }
-.legend_img {
-    width: 100%;
+
+/* for mobile */
+@media only screen and (max-width: 410px) {
+    .legend_img {
+        display: none;
+    } 
+    .leaflet-control-velocity{
+        display: none;
+    }
+}
+/* for pc */
+@media only screen and (min-width: 410px) {
+    .legend_img {
+        width: 100%;
+    } 
 }
