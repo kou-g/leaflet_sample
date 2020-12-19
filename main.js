@@ -23,10 +23,12 @@ var border = L.tileLayer('./tile/border/{z}/{x}/{y}.png', {
 
 var own = L.tileLayer('./tile/own/{z}/{x}/{y}.png');
 
-var hyp = L.tileLayer('./tile/hyp/{z}/{x}/{y}.png');
+var hyp = L.tileLayer('./tile/hyp/{z}/{x}/{y}.png', {
+    attribution: "<a href='https://www.naturalearthdata.com/' target='_blank'>Natural Earth</a>",
+});
 
 var chiri = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
-    attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>",
+    attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>国土地理院</a>",
 });
 
 L.latlngGraticule({
@@ -92,7 +94,7 @@ var legend_temp = L.control.htmllegend({
     position: 'bottomleft',
     legends: [{
         layer: temp,
-        elements: [{ html: '<div><span>気温</span><img class="legend_img" src=./img/legend_temp.png></img></div>' }]
+        elements: [{ html: '<div class="legend"><span>気温</span><img class="legend_img" src=./img/legend_temp.png></img></div>' }]
     }],
         disableVisibilityControls: true,
     })
@@ -113,7 +115,7 @@ var legend_radar = L.control.htmllegend({
     position: 'bottomleft',
     legends: [{
         layer: radar,
-        elements: [{ html: '<div><span>気象レーダー</span><img class="legend_img" src=./img/legend_radar.png></img></div>' }]
+        elements: [{ html: '<div class="legend"><span>気象レーダー</span><img class="legend_img" src=./img/legend_radar.png></img></div>' }]
     }],
         disableVisibilityControls: true,
     })
@@ -150,7 +152,8 @@ var baseTree = {
         { label: '標準図', layer: own },
         { label: '標高図', layer: hyp },
         { label: '国土地理院', layer: chiri },
-    ]
+    ],
+    collapsed: true,
 };
 
 var overlayTree = {
@@ -176,7 +179,7 @@ var overlayTree = {
 };
 
 var options = {
-//    collapsed: false
+    collapsed: false
 }
 L.control.layers.tree(baseTree, overlayTree, options).addTo(map);
 

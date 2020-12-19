@@ -37,7 +37,7 @@ span.leaflet-layerstree-header-label {
 
 /* for mobile */
 @media only screen and (max-width: 410px) {
-    .legend_img {
+    .legend {
         display: none;
     } 
     .leaflet-control-velocity{
