@@ -158,7 +158,7 @@ L.marker([33.35, 130.27], {icon: L.spriteIcon('green')}).on('click', function(){
 var baseTree = {
     label: '地図選択',
     children: [
-        { label: '標準図', layer: null },
+        { label: '標準図', layer: own },
         { label: 'Natural Earth', layer: hyp },
         { label: '国土地理院', layer: chiri },
     ],
