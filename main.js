@@ -188,7 +188,7 @@ var overlayTree = {
 };
 
 var options = {
-    collapsed: false
+   // collapsed: false
 }
 L.control.layers.tree(baseTree, overlayTree, options).addTo(map);
 
