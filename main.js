@@ -8,8 +8,8 @@ var map = L.map('map', {
 })
 
 // ペイン定義 ペインのz-order定義
+var pane_velocity = map.createPane('pane_velocity');  pane_velocity.style.zIndex = 500;
 var pane_border   = map.createPane('pane_border');    pane_border.style.zIndex   = 450;
-var pane_velocity = map.createPane('pane_velocity');  pane_velocity.style.zIndex = 449;
 var pane_radar    = map.createPane('pane_radar');     pane_radar.style.zIndex    = 448;
 var pane_lowest   = map.createPane('pane_lowest');    pane_lowest.style.zIndex   = 200;
 
@@ -21,7 +21,9 @@ var border = L.tileLayer('./tile/border/{z}/{x}/{y}.png', {
     pane: pane_border
 }).addTo(map);
 
-var own = L.tileLayer('./tile/own/{z}/{x}/{y}.png');
+var own = L.tileLayer('./tile/own/{z}/{x}/{y}.png', {
+    opacity: 0.6,
+});
 
 var hyp = L.tileLayer('./tile/hyp/{z}/{x}/{y}.png', {
     attribution: "<a href='https://www.naturalearthdata.com/' target='_blank'>Natural Earth</a>",
@@ -133,15 +135,22 @@ L.imageOverlay('./img/eisei.png', bounds, {
 
 // METAR
 var metar = L.layerGroup();
-L.marker([42.40, 141.40]).addTo(metar)
-L.marker([35.33, 139.46]).addTo(metar)
-L.marker([33.35, 130.27]).addTo(metar)
+L.marker([42.40, 141.40])
+    .bindPopup("<b>!!!DUMMY data!!!</b><br>XX/XXXXZ 27004KT 9999 VCSH FEW020 SCT040 BKN060 M07/M10 Q1010").openPopup()
+    .addTo(metar);
+L.marker([35.33, 139.46])
+    .bindPopup("<b>!!!DUMMY data!!!</b><br>XX/XXXXZ 36015KT 9999 FEW030 BKN/// 08/M02 Q1016").openPopup()
+    .addTo(metar);
+L.marker([33.35, 130.27])
+    .bindPopup("<b>!!!DUMMY data!!!</b><br>XX/XXXXZ 30011KT 9999 FEW030 SCT040 BKN/// 07/M02 Q1027").openPopup()
+    .addTo(metar);
 
 // METEOGRAM
 var meteogram = L.layerGroup();
-L.marker([42.40, 141.40]).addTo(meteogram)
-L.marker([35.33, 139.46]).addTo(meteogram)
-L.marker([33.35, 130.27]).addTo(meteogram)
+L.Icon.Default.imagePath = './leaflet/images/';
+L.marker([42.40, 141.40], {icon: L.spriteIcon('green')}).on('click', function(){window.open('./img/meteogram_sample.png','_blank')}).addTo(meteogram);
+L.marker([35.33, 139.46], {icon: L.spriteIcon('green')}).on('click', function(){window.open('./img/meteogram_sample.png','_blank')}).addTo(meteogram);
+L.marker([33.35, 130.27], {icon: L.spriteIcon('green')}).on('click', function(){window.open('./img/meteogram_sample.png','_blank')}).addTo(meteogram);
 
 /***************************
  * control
@@ -149,8 +158,8 @@ L.marker([33.35, 130.27]).addTo(meteogram)
 var baseTree = {
     label: '地図選択',
     children: [
-        { label: '標準図', layer: own },
-        { label: '標高図', layer: hyp },
+        { label: '標準図', layer: null },
+        { label: 'Natural Earth', layer: hyp },
         { label: '国土地理院', layer: chiri },
     ],
     collapsed: true,
