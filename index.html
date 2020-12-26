@@ -47,53 +47,5 @@
 
     <link rel="stylesheet" href="main.css">
     <script src="./main.js"></script>
-
-
-<!--
-
-grads -lbc make_img.gs
-#tif画像の最高最低気温を検索
-### rec=`gdalinfo -mm ./tmp/temp1.tif | grep "Minimum="`
-### min=`echo $rec | cut -d"," -f1 | cut -d"=" -f2`
-### max=`echo $rec | cut -d"," -f2 | cut -d"=" -f2` rec=​`gdalinfo -mm ./tmp/temp1.tif ​|​grep "Computed Min/Max="` min=​`echo ​$rec​​|​cut -d"=" -f2 ​|​cut -d"," -f1`
-max=​`echo ​$rec​​|​cut -d"," -f2`
-#気温幅を16分割
-step_cnt=16
-step=​`echo "scale=4; (​$max​- ​$min​) / (​$step_cnt​-1) " ​|​bc` vals=()
-for​​((i​=​1​; i ​<=​​$step_cnt​; i​++​))​; ​do
-val=​`echo "scale=4; ​$min​+ (​$step​* (​$i​-1)) " ​|​bc`
-vals[​$i​]=​`printf '%.0f \n' ​\`​echo ​$val​​|​bc -l ​\`​` done
-#rgb定義
-rgb=()
-rgb[ 1]=​' 0, 0, 173' rgb[ 2]=​' 0, 0, 220' rgb[ 3]=​' 0, 19, 254' rgb[ 4]=​' 0, 89, 254' rgb[ 5]=​' 0, 163, 254' rgb[ 6]=​' 0, 233, 254' rgb[ 7]=​' 95, 253, 159' rgb[ 8]=​'155, 254, 99' rgb[ 9]=​'211, 254, 43' rgb[10]=​'254, 243, 0' rgb[11]=​'254, 187, 0' rgb[12]=​'254, 131, 0' rgb[13]=​'254, 71, 0' rgb[14]=​'254, 15, 0' rgb[15]=​'220, 0, 0' rgb[16]=​'173, 0, 0'
-#color_table_temp.txt出力
- 
-     :​> color_table_temp.txt
-for​​((i​=​1​; i ​<=​​$step_cnt​; i​++​))​; ​do
-​echo​​${vals[$i]}​, ​${rgb[$i]}​>> color_table_temp.txt done
-#座標系変換
-gdalwarp -s_srs ​"EPSG:4326"​-t_srs ​"EPSG:3857"​./tmp/temp1.tif ./tmp/temp2.tif #着色
-gdaldem color-relief -of PNG ./tmp/temp2.tif color_table_temp.txt ./tmp/temp.png
-#必要画像のみ転送
-cp -p ./tmp/temp.png ./img/temp.png
-#凡例画像の作成
-:​> make_legend.gs
-for​​((i​=​1​; i ​<=​​$step_cnt​; i​++​))​; ​do
-​echo​​"val."​$i​"="​${vals[$i]}​>> make_legend.gs done
- cat <<​​eof​>>
-"set rgb 21
-"set rgb 22
-"set rgb 23
-"set rgb 24
-"set rgb 25
-"set rgb 26
-"set rgb 27 95 253 159" "set rgb 28 155 254 99" "set rgb 29 211 254 43" "set rgb 30 254 243 0" "set rgb 31 254 187 0" "set rgb 32 254 131 0" "set rgb 33 254 71 0" "set rgb 34 254 15 0" "set rgb 35 220 0 0" "set rgb 36 173 0 0"
-pic_w=11.0
-step_cnt=16
-x1=0.0
-x2=x1 + (pic_w / step_cnt)
-
--->
-
 </body>
 </html>
