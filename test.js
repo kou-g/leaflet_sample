@@ -14,3 +14,12 @@ function toBase64Url(url, callback){
 toBase64Url('pngToBase64/cross_red.png', function(base64Url){
   console.log('base64Url : ', base64Url);
 });
+
+
+/*
+this is memo
+num_array = [0,1,2,3,4,5]
+print(num_array[0::2])
+result...[0, 2, 4]
+
+*/
