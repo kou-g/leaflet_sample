@@ -108,7 +108,7 @@ var lat1 = 20.0;  var lon1 = 120.0;
 var lat2 = 48.0;  var lon2 = 150.0;
 var bounds = L.latLngBounds([lat1, lon1],[lat2, lon2]);
 L.imageOverlay('./img/radar_tmp.gif', bounds, {
-    opacity: 0.8,
+    opacity: 0.5,
     pane: pane_radar
 }).addTo(radar);
 
